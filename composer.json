@@ -1,0 +1,50 @@
+{
+    "name": "contrib/yii2-subscriber",
+    "description": "Управление подпсичиками. Сохранение геолокации подписчика, возможность привязки к группам рассылок",
+    "type": "yii2-extension",
+    "keywords": [
+        "yii2",
+        "extension",
+        "subscriber",
+        "subscription",
+        "subscription groups"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "tina",
+            "email": "sayapina.tina@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "composer",
+            "url": "http://packagist.dev-vps.ru"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "yiisoft/yii2": "~2.0.12",
+        "yii2-developer/yii2-extend": "~0.0.1 | ^0.1"
+    },
+    "require-dev": {
+        "voskobovich/yii2-many-many-behavior": "^3.0"
+    },
+    "config": {
+        "secure-http": false
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.x-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "tina\\subscriber\\": ""
+        }
+    }
+}
