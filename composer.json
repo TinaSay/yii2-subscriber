@@ -23,7 +23,7 @@
         },
         {
             "type": "composer",
-            "url": "http://packagist.dev-vps.ru"
+            "url": "https://packagist.dev-vps.ru"
         }
     ],
     "require": {
@@ -33,9 +33,6 @@
     },
     "require-dev": {
         "voskobovich/yii2-many-many-behavior": "^3.0"
-    },
-    "config": {
-        "secure-http": false
     },
     "extra": {
         "branch-alias": {
