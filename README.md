@@ -25,7 +25,7 @@ backend:
 ```
     'modules' => [
         'subscriber' => [
-            'class' => 'tina\subscriber\Module',
+            'class' => \tina\subscriber\Module::class,
             'viewPath' => '@tina/subscriber/views/backend',
             'controllerNamespace' => 'tina\subscriber\controllers\backend',
         ],
@@ -91,18 +91,33 @@ console:
     ],
 ```
 frontend:
+
 ```
 $config = [
     'on afterRequest' => function () {
         Yii::$app->getResponse()->getHeaders()->add('Content-Security-Policy',
-        'default-src \'none\'; script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' https://api-maps.yandex.ru https://suggest-maps.yandex.ru https://*.maps.yandex.net https://yandex.ru ajax.googleapis.com api-maps.yandex.ru; connect-src \'self\'; child-src \'self\'; img-src * data:; style-src * blob: \'unsafe-inline\'; font-src *;');
+        ' \'unsafe-eval\' https://api-maps.yandex.ru https://suggest-maps.yandex.ru https://*.maps.yandex.net https://yandex.ru ajax.googleapis.com api-maps.yandex.ru; style-src * blob: \'unsafe-inline\';');
     {
 ]
 
 ```
-
 Use:
 ----
+
+Controller:
+
+```
+    public function actions()
+    {
+        return [
+            'save-form' => [
+                'class' => SaveFormAction::class,
+                'successUrl' => '../success',
+                'errorUrl' => '../error',
+            ],
+        ];
+    }
+```
 
 ```
 <?= SubscriberWidget::widget(); ?>

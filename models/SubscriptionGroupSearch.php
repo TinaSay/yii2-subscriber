@@ -38,7 +38,7 @@ class SubscriptionGroupSearch extends SubscriptionGroup
      */
     public function search($params)
     {
-        $query = SubscriptionGroup::find();
+        $query = SubscriptionGroup::find()->language();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -53,11 +53,12 @@ class SubscriptionGroupSearch extends SubscriptionGroup
         $query->andFilterWhere([
             'id' => $this->id,
             'hidden' => $this->hidden,
-            'createdAt' => $this->createdAt,
-            'updatedAt' => $this->updatedAt,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'createdAt', $this->createdAt])
+            ->andFilterWhere(['like', 'updatedAt', $this->updatedAt]);
 
         return $dataProvider;
     }

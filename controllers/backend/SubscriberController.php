@@ -67,12 +67,9 @@ class SubscriberController extends Controller
     public function actionCreate()
     {
         $model = new Subscriber();
+        $model->detachBehavior('IpBehavior');
 
-        $model->load(Yii::$app->request->post());
-        $model->ip = ip2long($_SERVER['REMOTE_ADDR']);
-        $model->link = Yii::$app->request->getAbsoluteUrl();
-
-        if ($model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

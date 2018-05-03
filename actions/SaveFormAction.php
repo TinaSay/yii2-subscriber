@@ -10,7 +10,7 @@ namespace tina\subscriber\actions;
 
 use yii\base\Action;
 use tina\subscriber\models\Subscriber;
-use yii;
+use Yii;
 
 /**
  * Class SaveFormAction
@@ -20,15 +20,29 @@ use yii;
 class SaveFormAction extends Action
 {
     /**
-     * @return string|yii\web\Response
+     * @var string|array
+     */
+    public $successUrl;
+    /**
+     * @var string|array
+     */
+    public $errorUrl;
+
+    /**
+     * @return \yii\web\Response
      */
     public function run()
     {
         $model = new Subscriber();
-        $model->load(Yii::$app->request->post());
-        $model->ip = ip2long($_SERVER['REMOTE_ADDR']);
-        $model->link = Yii::$app->request->getAbsoluteUrl();
-        $model->save();
-        return $this->controller->renderContent('Спасибо за подписку!');
+        if ($model->load(Yii::$app->request->post())) {
+            $model->link = Yii::$app->request->getAbsoluteUrl();
+            if ($model->save()) {
+                return $this->controller->redirect($this->successUrl);
+            } else {
+                return $this->controller->redirect($this->errorUrl);
+            }
+        } else {
+            return $this->controller->redirect($this->errorUrl);
+        }
     }
 }

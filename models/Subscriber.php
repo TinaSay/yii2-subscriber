@@ -4,6 +4,9 @@ namespace tina\subscriber\models;
 
 use krok\extend\behaviors\TimestampBehavior;
 use voskobovich\behaviors\ManyToManyBehavior;
+use krok\extend\behaviors\IpBehavior;
+use krok\extend\traits\BlockedAttributeTrait;
+use krok\extend\interfaces\BlockedAttributeInterface;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -15,13 +18,16 @@ use yii\helpers\ArrayHelper;
  * @property string $city
  * @property integer $ip
  * @property string $link
+ * @property integer $blocked
  * @property string $createdAt
  * @property string $updatedAt
  *
  * @property SubscriptionGroup[] $groupRelation
  */
-class Subscriber extends \yii\db\ActiveRecord
+class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterface
 {
+    use BlockedAttributeTrait;
+
     /**
      * @return array
      */
@@ -47,6 +53,9 @@ class Subscriber extends \yii\db\ActiveRecord
                     'groupIDs' => 'groupRelation',
                 ],
             ],
+            'IpBehavior' => [
+                'class' => IpBehavior::class,
+            ],
         ];
     }
 
@@ -67,7 +76,8 @@ class Subscriber extends \yii\db\ActiveRecord
             [['email'], 'required'],
             [['email'], 'email'],
             [['email'], 'unique'],
-            [['createdAt', 'updatedAt', 'ip', 'country', 'city', 'link'], 'safe'],
+            [['blocked'], 'integer'],
+            [['createdAt', 'updatedAt', 'country', 'city', 'ip', 'link'], 'safe'],
             [['groupIDs'], 'each', 'rule' => ['integer']],
         ];
     }
@@ -82,10 +92,12 @@ class Subscriber extends \yii\db\ActiveRecord
             'email' => 'Email',
             'country' => 'Страна',
             'city' => 'Город',
-            'ip' => 'Ip',
+            'ip' => 'Ip адрес',
             'link' => 'Адрес страницы',
+            'blocked' => 'Заблокирован',
             'createdAt' => 'Добавлен',
             'updatedAt' => 'Обновлен',
+            'groupIDs' => 'Группы рассылок',
         ];
     }
 
@@ -94,9 +106,9 @@ class Subscriber extends \yii\db\ActiveRecord
      */
     public function getGroupRelation()
     {
-        return $this->hasMany(SubscriptionGroup::class, ['id' => 'group_id'])
+        return $this->hasMany(SubscriptionGroup::class, ['id' => 'groupId'])
             ->viaTable(SubscriptionGroupAssignment::tableName(),
-                ['subscriber_id' => 'id']);
+                ['subscriberId' => 'id']);
     }
 
     /**

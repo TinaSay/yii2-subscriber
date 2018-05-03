@@ -2,6 +2,8 @@
 
 namespace tina\subscriber\models;
 
+use Yii;
+
 /**
  * This is the ActiveQuery class for [[SubscriptionGroup]].
  *
@@ -25,5 +27,21 @@ class SubscriptionGroupQuery extends \yii\db\ActiveQuery
     public function one($db = null)
     {
         return parent::one($db);
+    }
+
+    /**
+     * @param null|string $language
+     *
+     * @return $this
+     */
+    public function language($language = null)
+    {
+        if ($language === null) {
+            $language = Yii::$app->language;
+        }
+
+        $this->andWhere(['[[language]]' => $language]);
+
+        return $this;
     }
 }

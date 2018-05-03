@@ -16,7 +16,7 @@ class SubscriberSearch extends Subscriber
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'blocked'], 'integer'],
             [['email', 'country', 'city', 'ip', 'link', 'createdAt', 'updatedAt'], 'safe'],
         ];
     }
@@ -52,6 +52,7 @@ class SubscriberSearch extends Subscriber
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'blocked' => $this->blocked,
         ]);
 
         $query->andFilterWhere(['like', 'email', $this->email])

@@ -6,8 +6,8 @@ namespace tina\subscriber\models;
  * This is the model class for table "{{%subscription_group_assignment}}".
  *
  * @property integer $id
- * @property integer $subscriber_id
- * @property integer $group_id
+ * @property integer $subscriberId
+ * @property integer $groupId
  *
  * @property SubscriptionGroup $group
  * @property Subscriber $subscriber
@@ -38,21 +38,21 @@ class SubscriptionGroupAssignment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subscriber_id', 'group_id'], 'required'],
-            [['subscriber_id', 'group_id'], 'integer'],
+            [['subscriberId', 'groupId'], 'required'],
+            [['subscriberId', 'groupId'], 'integer'],
             [
-                ['group_id'],
+                ['groupId'],
                 'exist',
                 'skipOnError' => true,
                 'targetClass' => SubscriptionGroup::className(),
-                'targetAttribute' => ['group_id' => 'id'],
+                'targetAttribute' => ['groupId' => 'id'],
             ],
             [
-                ['subscriber_id'],
+                ['subscriberId'],
                 'exist',
                 'skipOnError' => true,
                 'targetClass' => Subscriber::className(),
-                'targetAttribute' => ['subscriber_id' => 'id'],
+                'targetAttribute' => ['subscriberId' => 'id'],
             ],
         ];
     }
@@ -64,8 +64,8 @@ class SubscriptionGroupAssignment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'subscriber_id' => 'Subscriber ID',
-            'group_id' => 'Group ID',
+            'subscriberId' => 'Subscriber ID',
+            'groupId' => 'Group ID',
         ];
     }
 
@@ -74,7 +74,7 @@ class SubscriptionGroupAssignment extends \yii\db\ActiveRecord
      */
     public function getGroup()
     {
-        return $this->hasOne(SubscriptionGroup::className(), ['id' => 'group_id']);
+        return $this->hasOne(SubscriptionGroup::className(), ['id' => 'groupId']);
     }
 
     /**
@@ -82,7 +82,7 @@ class SubscriptionGroupAssignment extends \yii\db\ActiveRecord
      */
     public function getSubscriber()
     {
-        return $this->hasOne(Subscriber::className(), ['id' => 'subscriber_id']);
+        return $this->hasOne(Subscriber::className(), ['id' => 'subscriberId']);
     }
 
     /**

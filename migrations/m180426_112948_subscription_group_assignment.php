@@ -15,14 +15,14 @@ class m180426_112948_subscription_group_assignment extends Migration
         $options = ($this->db->getDriverName() === 'mysql') ? 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci' : null;
         $this->createTable('{{%subscription_group_assignment}}', [
             'id' => $this->primaryKey(),
-            'subscriber_id' => $this->integer(11)->notNull(),
-            'group_id' => $this->integer(11)->notNull(),
+            'subscriberId' => $this->integer(11)->notNull(),
+            'groupId' => $this->integer(11)->notNull(),
         ], $options);
 
         $this->addForeignKey(
-            'group_assignment_subscriber_id_subscriber_id',
+            'group_assignment_subscriberId_subscriberId',
             '{{%subscription_group_assignment}}',
-            'subscriber_id',
+            'subscriberId',
             '{{%subscriber}}',
             'id',
             'CASCADE',
@@ -30,9 +30,9 @@ class m180426_112948_subscription_group_assignment extends Migration
         );
 
         $this->addForeignKey(
-            'group_assignment_group_id_subscription_group_id',
+            'group_assignment_groupId_subscription_groupId',
             '{{%subscription_group_assignment}}',
-            'group_id',
+            'groupId',
             '{{%subscription_group}}',
             'id',
             'CASCADE',
@@ -45,8 +45,8 @@ class m180426_112948_subscription_group_assignment extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('group_assignment_group_id_subscription_group_id', '{{%subscription_group_assignment}}');
-        $this->dropForeignKey('group_assignment_subscriber_id_subscriber_id', '{{%subscription_group_assignment}}');
+        $this->dropForeignKey('group_assignment_groupId_subscription_groupId', '{{%subscription_group_assignment}}');
+        $this->dropForeignKey('group_assignment_subscriberId_subscriberId', '{{%subscription_group_assignment}}');
         $this->dropTable('{{%subscription_group_assignment}}');
     }
 }

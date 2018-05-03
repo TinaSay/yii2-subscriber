@@ -16,10 +16,13 @@ class m180426_104206_subscription_group extends Migration
         $this->createTable('{{%subscription_group}}', [
             'id' => $this->primaryKey(),
             'title' => $this->string(64)->notNull()->unique(),
-            'hidden' => $this->smallInteger(1)->defaultValue(0),
+            'hidden' => $this->smallInteger(1)->notNull()->defaultValue(0),
+            'language' => $this->string(8)->notNull(),
             'createdAt' => $this->dateTime()->notNull()->defaultValue(null),
             'updatedAt' => $this->dateTime()->null()->defaultValue(null),
         ], $options);
+
+        $this->createIndex('titleLanguage', '{{%subscription_group}}', ['title', 'language'], true);
     }
 
     /**

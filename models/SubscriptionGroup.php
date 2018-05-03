@@ -3,6 +3,7 @@
 namespace tina\subscriber\models;
 
 use krok\extend\behaviors\TimestampBehavior;
+use krok\extend\behaviors\LanguageBehavior;
 use krok\extend\interfaces\HiddenAttributeInterface;
 use krok\extend\traits\HiddenAttributeTrait;
 use yii\helpers\ArrayHelper;
@@ -13,6 +14,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $id
  * @property string $title
  * @property integer $hidden
+ * @property string $language
  * @property string $createdAt
  * @property string $updatedAt
  */
@@ -39,6 +41,9 @@ class SubscriptionGroup extends \yii\db\ActiveRecord implements HiddenAttributeI
             'TimestampBehavior' => [
                 'class' => TimestampBehavior::class,
             ],
+            'LanguageBehavior' => [
+                'class' => LanguageBehavior::class,
+            ],
         ];
     }
 
@@ -60,7 +65,7 @@ class SubscriptionGroup extends \yii\db\ActiveRecord implements HiddenAttributeI
             [['hidden'], 'integer'],
             [['createdAt', 'updatedAt'], 'safe'],
             [['title'], 'string', 'max' => 64],
-            [['title'], 'unique'],
+            [['title'], 'unique', 'targetAttribute' => ['title', 'language']],
         ];
     }
 
@@ -84,11 +89,10 @@ class SubscriptionGroup extends \yii\db\ActiveRecord implements HiddenAttributeI
      */
     public function getSubscribers()
     {
-        return $this->hasMany(Subscriber::class, ['id' => 'subscriber_id'])
+        return $this->hasMany(Subscriber::class, ['id' => 'subscriberId'])
             ->viaTable(SubscriptionGroupAssignment::tableName(),
-                ['group_id' => 'id'])->andWhere([SubscriptionGroup::tableName() . '.[[hidden]]' => self::HIDDEN_NO]);
+                ['groupId' => 'id'])->andWhere([SubscriptionGroup::tableName() . '.[[hidden]]' => self::HIDDEN_NO]);
     }
-
 
     /**
      * @return array
@@ -97,7 +101,7 @@ class SubscriptionGroup extends \yii\db\ActiveRecord implements HiddenAttributeI
     {
         return ArrayHelper::map(self::find()->where([
             'hidden' => self::HIDDEN_NO,
-        ])->all(), 'id', 'title');
+        ])->language()->all(), 'id', 'title');
     }
 
     /**

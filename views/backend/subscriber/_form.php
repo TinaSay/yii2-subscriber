@@ -6,6 +6,7 @@
 /* @var $model tina\subscriber\models\Subscriber */
 
 use tina\subscriber\models\SubscriptionGroup;
+use tina\subscriber\models\Subscriber;
 
 ?>
 
@@ -18,4 +19,6 @@ use tina\subscriber\models\SubscriptionGroup;
 
 <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'blocked')->dropDownList(Subscriber::getBlockedList()) ?>
+
 
