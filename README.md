@@ -96,7 +96,7 @@ frontend:
 $config = [
     'on afterRequest' => function () {
         Yii::$app->getResponse()->getHeaders()->add('Content-Security-Policy',
-        ' \'unsafe-eval\' https://api-maps.yandex.ru https://suggest-maps.yandex.ru https://*.maps.yandex.net https://yandex.ru ajax.googleapis.com api-maps.yandex.ru; style-src * blob: \'unsafe-inline\';');
+        'script-src 'self' 'unsafe-inline' 'unsafe-eval\' https://api-maps.yandex.ru https://suggest-maps.yandex.ru https://*.maps.yandex.net https://yandex.ru ajax.googleapis.com api-maps.yandex.ru; style-src * blob: \'unsafe-inline\';');
     {
 ]
 
@@ -112,8 +112,8 @@ Controller:
         return [
             'save-form' => [
                 'class' => SaveFormAction::class,
-                'successUrl' => '../success',
-                'errorUrl' => '../error',
+                'successUrl' => ['index'],
+                'errorUrl' => ['index'],
             ],
         ];
     }
