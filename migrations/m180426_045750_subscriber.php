@@ -18,6 +18,7 @@ class m180426_045750_subscriber extends Migration
             'email' => $this->string(64)->notNull()->unique(),
             'country' => $this->string(128)->null()->defaultValue(null),
             'city' => $this->string(128)->null()->defaultValue(null),
+            'coordinates' => $this->string(128)->null()->defaultValue(null),
             'ip' => $this->bigInteger(20)->null()->defaultValue(null),
             'link' => $this->string(256)->null()->defaultValue(null),
             'blocked' => $this->smallInteger(1)->notNull()->defaultValue(0),

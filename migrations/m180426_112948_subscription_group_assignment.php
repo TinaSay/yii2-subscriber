@@ -20,7 +20,7 @@ class m180426_112948_subscription_group_assignment extends Migration
         ], $options);
 
         $this->addForeignKey(
-            'group_assignment_subscriberId_subscriberId',
+            'group_assignment_subscriberId_subscriber_id',
             '{{%subscription_group_assignment}}',
             'subscriberId',
             '{{%subscriber}}',
@@ -30,7 +30,7 @@ class m180426_112948_subscription_group_assignment extends Migration
         );
 
         $this->addForeignKey(
-            'group_assignment_groupId_subscription_groupId',
+            'group_assignment_groupId_subscription_group_id',
             '{{%subscription_group_assignment}}',
             'groupId',
             '{{%subscription_group}}',
@@ -45,8 +45,8 @@ class m180426_112948_subscription_group_assignment extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('group_assignment_groupId_subscription_groupId', '{{%subscription_group_assignment}}');
-        $this->dropForeignKey('group_assignment_subscriberId_subscriberId', '{{%subscription_group_assignment}}');
+        $this->dropForeignKey('group_assignment_groupId_subscription_group_id', '{{%subscription_group_assignment}}');
+        $this->dropForeignKey('group_assignment_subscriberId_subscriber_id', '{{%subscription_group_assignment}}');
         $this->dropTable('{{%subscription_group_assignment}}');
     }
 }

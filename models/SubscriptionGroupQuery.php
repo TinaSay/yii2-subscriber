@@ -42,6 +42,6 @@ class SubscriptionGroupQuery extends \yii\db\ActiveQuery
 
         $this->andWhere(['[[language]]' => $language]);
 
-        return $this->andWhere([Subscriber::tableName() . '.[[language]]' => $language]);
+        return $this;
     }
 }

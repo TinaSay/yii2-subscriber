@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property string $email
  * @property string $country
  * @property string $city
+ * @property string $coordinates
  * @property integer $ip
  * @property string $link
  * @property integer $blocked
@@ -77,7 +78,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             [['email'], 'email'],
             [['email'], 'unique'],
             [['blocked'], 'integer'],
-            [['createdAt', 'updatedAt', 'country', 'city', 'ip', 'link'], 'safe'],
+            [['createdAt', 'updatedAt', 'country', 'city', 'coordinates', 'ip', 'link'], 'safe'],
             [['groupIDs'], 'each', 'rule' => ['integer']],
         ];
     }
@@ -92,6 +93,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             'email' => 'Email',
             'country' => 'Страна',
             'city' => 'Город',
+            'coordinates' => 'Координаты',
             'ip' => 'Ip адрес',
             'link' => 'Адрес страницы',
             'blocked' => 'Заблокирован',

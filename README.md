@@ -31,7 +31,15 @@ backend:
         ],
     ],
 ```
+```
+$config = [
+    'on afterRequest' => function () {
+        Yii::$app->getResponse()->getHeaders()->add('Content-Security-Policy',
+        'style-src * blob: 'unsafe-inline';');
+    }
+]
 
+```
 params:
 
 ```
@@ -52,7 +60,6 @@ params:
         ],
     ],
 ```
-
 console:
 
 ```
