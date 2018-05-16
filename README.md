@@ -35,7 +35,7 @@ backend:
 $config = [
     'on afterRequest' => function () {
         Yii::$app->getResponse()->getHeaders()->add('Content-Security-Policy',
-        'style-src * blob: 'unsafe-inline';');
+        connect-src * 'self'; 'style-src * blob: 'unsafe-inline';');
     }
 ]
 
@@ -121,6 +121,9 @@ Controller:
                 'class' => SaveFormAction::class,
                 'successUrl' => ['index'],
                 'errorUrl' => ['index'],
+            ],
+            'unsubscribe' => [
+                'class' => UnsubscribeAction::class,
             ],
         ];
     }

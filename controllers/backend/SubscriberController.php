@@ -59,16 +59,12 @@ class SubscriberController extends Controller
     }
 
     /**
-     * Creates a new Subscriber model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     *
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
         $model = new Subscriber();
         $model->detachBehavior('IpBehavior');
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

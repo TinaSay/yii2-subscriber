@@ -37,6 +37,7 @@ class SaveFormAction extends Action
         if ($model->load(Yii::$app->request->post())) {
             $model->link = Yii::$app->request->getAbsoluteUrl();
             if ($model->save()) {
+                $model->notifications();
                 return $this->controller->redirect($this->successUrl);
             } else {
                 return $this->controller->redirect($this->errorUrl);

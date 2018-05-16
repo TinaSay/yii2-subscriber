@@ -3,11 +3,17 @@
 namespace tina\subscriber\models;
 
 use krok\extend\behaviors\TimestampBehavior;
+use tina\subscriber\interfaces\ActiveAttributeInterface;
+use tina\subscriber\traits\ActiveAttributeTrait;
 use voskobovich\behaviors\ManyToManyBehavior;
 use krok\extend\behaviors\IpBehavior;
+use tina\subscriber\behaviors\TokenBehavior;
 use krok\extend\traits\BlockedAttributeTrait;
 use krok\extend\interfaces\BlockedAttributeInterface;
+use krok\extend\traits\HiddenAttributeTrait;
+use krok\extend\interfaces\HiddenAttributeInterface;
 use yii\helpers\ArrayHelper;
+use Yii;
 
 /**
  * This is the model class for table "{{%subscriber}}".
@@ -20,14 +26,18 @@ use yii\helpers\ArrayHelper;
  * @property integer $ip
  * @property string $link
  * @property integer $blocked
+ * @property integer $active
+ * @property string $token
  * @property string $createdAt
  * @property string $updatedAt
  *
  * @property SubscriptionGroup[] $groupRelation
  */
-class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterface
+class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterface, HiddenAttributeInterface, ActiveAttributeInterface
 {
     use BlockedAttributeTrait;
+    use HiddenAttributeTrait;
+    use ActiveAttributeTrait;
 
     /**
      * @return array
@@ -57,6 +67,9 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             'IpBehavior' => [
                 'class' => IpBehavior::class,
             ],
+            'TokenBehavior' => [
+                'class' => TokenBehavior::class,
+            ],
         ];
     }
 
@@ -77,8 +90,8 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             [['email'], 'required'],
             [['email'], 'email'],
             [['email'], 'unique'],
-            [['blocked'], 'integer'],
-            [['createdAt', 'updatedAt', 'country', 'city', 'coordinates', 'ip', 'link'], 'safe'],
+            [['blocked', 'active'], 'integer'],
+            [['createdAt', 'updatedAt', 'country', 'city', 'coordinates', 'ip', 'link', 'token'], 'safe'],
             [['groupIDs'], 'each', 'rule' => ['integer']],
         ];
     }
@@ -97,6 +110,8 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             'ip' => 'Ip адрес',
             'link' => 'Адрес страницы',
             'blocked' => 'Заблокирован',
+            'active' => 'Активный',
+            'token' => 'Токен',
             'createdAt' => 'Добавлен',
             'updatedAt' => 'Обновлен',
             'groupIDs' => 'Группы рассылок',
@@ -124,6 +139,19 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
         } else {
             return "Ничего не выбрано";
         }
+    }
+
+    /**
+     * formats E-mail message and sends it to subscriber
+     */
+    public function notifications()
+    {
+        $message = Yii::$app->mailer->compose('@app/extensions/subscriber/mail/form', ['model' => $this]);
+        $message
+            ->setFrom(Yii::$app->params['email'])
+            ->setTo($this->email)
+            ->setSubject('Сообщение с сайта ЭНСАЙН')
+            ->send();
     }
 
     /**

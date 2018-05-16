@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'ip',
                 'link:url',
                 'blocked:boolean',
+                'active:boolean',
                 [
                     'attribute' => 'Группы',
                     'value' => $model->getGroupsString(),
