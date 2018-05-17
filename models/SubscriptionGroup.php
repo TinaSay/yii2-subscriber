@@ -83,7 +83,6 @@ class SubscriptionGroup extends \yii\db\ActiveRecord implements HiddenAttributeI
         ];
     }
 
-
     /**
      * @return \yii\db\ActiveQuery
      */

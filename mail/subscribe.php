@@ -3,7 +3,6 @@
 /* @var $model \tina\subscriber\models\Subscriber */
 
 use yii\helpers\Url;
-
 ?>
 <h3>Здравствуйте!</h3>
 

@@ -6,9 +6,8 @@
  * Time: 16:33
  */
 
-namespace tina\subscriber\grid;
+namespace tina\subscriber\components;
 
-use tina\subscriber\interfaces\ActiveAttributeInterface;
 use yii\grid\DataColumn;
 
 /**
@@ -37,7 +36,6 @@ class ActiveColumn extends DataColumn
                 return $model->getActive();
             }
         }
-
         return parent::getDataCellValue($model, $key, $index);
     }
 

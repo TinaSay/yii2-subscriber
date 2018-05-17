@@ -1,14 +1,13 @@
 <?php
 
-namespace tina\subscriber\traits;
+namespace tina\subscriber\components;
 
-use tina\subscriber\interfaces\ActiveAttributeInterface;
 use yii\helpers\ArrayHelper;
 
 /**
  * Trait ActiveAttributeTrait
  *
- * @package tina\subscriber\traits
+ * @package tina\subscriber\components
  */
 trait ActiveAttributeTrait
 {

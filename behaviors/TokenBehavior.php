@@ -13,6 +13,11 @@ use yii\db\ActiveRecord;
 use Closure;
 use Yii;
 
+/**
+ * Class TokenBehavior
+ *
+ * @package tina\subscriber\behaviors
+ */
 class TokenBehavior extends AttributeBehavior
 {
     /** @var string */

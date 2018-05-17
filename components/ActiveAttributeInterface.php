@@ -1,11 +1,11 @@
 <?php
 
-namespace tina\subscriber\interfaces;
+namespace tina\subscriber\components;
 
 /**
  * Interface ActiveAttributeInterface
  *
- * @package tina\subscriber\interfaces
+ * @package tina\subscriber\components
  */
 interface ActiveAttributeInterface
 {

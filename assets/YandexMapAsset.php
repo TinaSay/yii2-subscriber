@@ -42,7 +42,6 @@ class YandexMapAsset extends AssetBundle
 
     /**
      * @var array
-     * @var array
      */
     public $depends = [
         JqueryAsset::class,

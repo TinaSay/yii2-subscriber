@@ -3,15 +3,13 @@
 namespace tina\subscriber\models;
 
 use krok\extend\behaviors\TimestampBehavior;
-use tina\subscriber\interfaces\ActiveAttributeInterface;
-use tina\subscriber\traits\ActiveAttributeTrait;
+use tina\subscriber\components\ActiveAttributeInterface;
+use tina\subscriber\components\ActiveAttributeTrait;
 use voskobovich\behaviors\ManyToManyBehavior;
 use krok\extend\behaviors\IpBehavior;
 use tina\subscriber\behaviors\TokenBehavior;
 use krok\extend\traits\BlockedAttributeTrait;
 use krok\extend\interfaces\BlockedAttributeInterface;
-use krok\extend\traits\HiddenAttributeTrait;
-use krok\extend\interfaces\HiddenAttributeInterface;
 use yii\helpers\ArrayHelper;
 use Yii;
 
@@ -33,10 +31,9 @@ use Yii;
  *
  * @property SubscriptionGroup[] $groupRelation
  */
-class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterface, HiddenAttributeInterface, ActiveAttributeInterface
+class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterface, ActiveAttributeInterface
 {
     use BlockedAttributeTrait;
-    use HiddenAttributeTrait;
     use ActiveAttributeTrait;
 
     /**
@@ -146,7 +143,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
      */
     public function notifications()
     {
-        $message = Yii::$app->mailer->compose('@app/extensions/subscriber/mail/form', ['model' => $this]);
+        $message = Yii::$app->mailer->compose('@vendor/contrib/yii2-subscriber/mail/subscribe', ['model' => $this]);
         $message
             ->setFrom(Yii::$app->params['email'])
             ->setTo($this->email)
