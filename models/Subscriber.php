@@ -66,6 +66,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             ],
             'TokenBehavior' => [
                 'class' => TokenBehavior::class,
+                'stringLength' => 128,
             ],
         ];
     }

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: nsign
- * Date: 16.05.18
- * Time: 16:07
- */
 
 namespace tina\subscriber\behaviors;
 
@@ -23,6 +17,9 @@ class TokenBehavior extends AttributeBehavior
     /** @var string */
     public $attribute = 'token';
 
+    /** @var string */
+    public $stringLength;
+
     public function init()
     {
         parent::init();
@@ -38,11 +35,10 @@ class TokenBehavior extends AttributeBehavior
      * @param \yii\base\Event $event
      *
      * @return mixed|string
-     * @throws \yii\base\Exception
      */
     protected function getValue($event)
     {
         return $this->value instanceof Closure ? call_user_func($this->value,
-            $event) : Yii::$app->getSecurity()->generateRandomString();
+            $event) : Yii::$app->getSecurity()->generateRandomString($this->stringLength);
     }
 }

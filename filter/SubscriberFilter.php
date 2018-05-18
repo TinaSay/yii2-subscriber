@@ -59,7 +59,7 @@ class SubscriberFilter extends Subscriber implements SubscriberFilterInterface
     /**
      * @param array $params
      *
-     * @return array|mixed|Subscriber[]
+     * @return array|Subscriber[]
      */
     public function filter(array $params)
     {

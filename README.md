@@ -23,6 +23,15 @@ Configure
 backend:
 
 ```
+$config = [
+    'on afterRequest' => function () {
+        Yii::$app->getResponse()->getHeaders()->add('Content-Security-Policy',
+        'script-src * 'self' 'unsafe-inline' 'unsafe-eval';connect-src * 'self' speller.yandex.net;child-src * 'self';style-src * blob: 'unsafe-inline';');
+    }
+]
+
+```
+```
     'modules' => [
         'subscriber' => [
             'class' => \tina\subscriber\Module::class,
@@ -30,15 +39,6 @@ backend:
             'controllerNamespace' => 'tina\subscriber\controllers\backend',
         ],
     ],
-```
-```
-$config = [
-    'on afterRequest' => function () {
-        Yii::$app->getResponse()->getHeaders()->add('Content-Security-Policy',
-        connect-src * 'self'; 'style-src * blob: 'unsafe-inline';');
-    }
-]
-
 ```
 params:
 
@@ -103,7 +103,7 @@ frontend:
 $config = [
     'on afterRequest' => function () {
         Yii::$app->getResponse()->getHeaders()->add('Content-Security-Policy',
-        'script-src 'self' 'unsafe-inline' 'unsafe-eval\' https://api-maps.yandex.ru https://suggest-maps.yandex.ru https://*.maps.yandex.net https://yandex.ru ajax.googleapis.com api-maps.yandex.ru; style-src * blob: \'unsafe-inline\';');
+        'script-src * 'self' 'unsafe-inline'; style-src * blob: 'unsafe-inline';');
     {
 ]
 
@@ -118,18 +118,41 @@ Controller:
     {
         return [
             'save-form' => [
-                'class' => SaveFormAction::class,
+                'class' => tina\subscriber\actions\SaveFormAction::class,
                 'successUrl' => ['index'],
                 'errorUrl' => ['index'],
             ],
             'unsubscribe' => [
-                'class' => UnsubscribeAction::class,
+                'class' => tina\subscriber\actions\UnsubscribeAction::class,
             ],
         ];
     }
 ```
+View:
 
 ```
-<?= SubscriberWidget::widget(); ?>
+<?= tina\subscriber\widgets\SubscriberWidget::widget(); ?>
 
 ```
+Use filter:
+---
+
+Controller:
+
+```
+    $subscriberFilter = new SubscriberFilter();
+
+    $query = $subscriberFilter->filter([
+        ['column' => 'value'],
+    ]);
+    
+    // or operator format
+    
+    $query = $subscriberFilter->filter([
+        'and',
+        ['column' => 'value'],
+        ['like', 'column', 'value'],
+    ]);    
+    
+```
+

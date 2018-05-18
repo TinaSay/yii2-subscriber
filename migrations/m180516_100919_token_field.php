@@ -12,7 +12,7 @@ class m180516_100919_token_field extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('{{%subscriber}}', 'token', $this->string(32)->notNull()->after('active'));
+        $this->addColumn('{{%subscriber}}', 'token', $this->string(128)->notNull()->after('active'));
     }
 
     /**
