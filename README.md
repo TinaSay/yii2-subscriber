@@ -108,22 +108,35 @@ $config = [
 ]
 
 ```
+...
+
+```
+    'modules' => [
+        'subscriber' => [
+            'class' => \tina\subscriber\Module::class,
+            'viewPath' => '@tina/subscriber/views/frontend',
+            'controllerNamespace' => 'tina\subscriber\controllers\frontend',
+        ],
+    ],
+
+```
 Use:
 ----
-
-Controller:
+Example of usage in SubscriberController:
 
 ```
     public function actions()
     {
         return [
-            'save-form' => [
-                'class' => tina\subscriber\actions\SaveFormAction::class,
-                'successUrl' => ['index'],
-                'errorUrl' => ['index'],
+            'save' => [
+                'class' => SaveAction::class,
+                'successUrl' => ['/'],
+                'errorUrl' => ['/'],
             ],
             'unsubscribe' => [
-                'class' => tina\subscriber\actions\UnsubscribeAction::class,
+                'class' => UnsubscribeAction::class,
+                'successUrl' => ['/'],
+                'errorUrl' => ['/'],
             ],
         ];
     }
@@ -132,7 +145,6 @@ View:
 
 ```
 <?= tina\subscriber\widgets\SubscriberWidget::widget(); ?>
-
 ```
 Use filter:
 ---
@@ -152,7 +164,6 @@ Controller:
         'and',
         ['column' => 'value'],
         ['like', 'column', 'value'],
-    ]);    
-    
-```
+    ]);
 
+```

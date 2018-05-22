@@ -1,5 +1,6 @@
 <?php
 /** @var $model Subscriber */
+
 use tina\subscriber\assets\YandexMapAsset;
 use tina\subscriber\models\Subscriber;
 use yii\helpers\Url;
@@ -8,7 +9,7 @@ use yii\helpers\Html;
 
 YandexMapAsset::register($this);
 
-$action = Url::to(['save-form']);
+$action = Url::to(['/subscriber/subscriber/save']);
 
 /** @var $this \yii\web\View */
 /* @var $list subscriber[] */

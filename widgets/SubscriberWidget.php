@@ -12,13 +12,16 @@ use tina\subscriber\models\Subscriber;
  */
 class SubscriberWidget extends Widget
 {
+    /** @var string */
+    public $view = 'subscribe_form';
+
     /**
      * @return string
      */
     public function run()
     {
         $model = new Subscriber();
-        return $this->render('subscribe_form', [
+        return $this->render($this->view, [
             'model' => $model,
         ]);
     }

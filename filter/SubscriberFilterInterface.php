@@ -10,30 +10,30 @@ namespace tina\subscriber\filter;
 interface SubscriberFilterInterface
 {
     /**
-     * @param $limit
+     * @param int $limit
      *
-     * @return mixed
+     * @return int
      */
-    public function setLimit($limit);
+    public function setLimit(int $limit);
 
     /**
-     * @param $offset
+     * @param int $offset
      *
-     * @return mixed
+     * @return int
      */
-    public function setOffset($offset);
+    public function setOffset(int $offset);
 
     /**
-     * @param $orderBy
+     * @param string $orderBy
      *
-     * @return mixed
+     * @return string
      */
-    public function setOrder($orderBy);
+    public function setOrderBy(string $orderBy);
 
     /**
      * @param array $params
      *
-     * @return mixed
+     * @return array
      */
     public function filter(array $params);
 }

@@ -3,57 +3,61 @@
 namespace tina\subscriber\filter;
 
 use tina\subscriber\models\Subscriber;
+use yii\base\BaseObject;
 
 /**
  * Class SubscriberFilter
  *
  * @package tina\subscriber\filter
  */
-class SubscriberFilter extends Subscriber implements SubscriberFilterInterface
+class SubscriberFilter extends BaseObject implements SubscriberFilterInterface
 {
     /**
      * @var int $limit
      */
-    public $limit;
+    protected $limit;
 
     /**
      * @var int $offset
      */
-    public $offset;
+    protected $offset;
 
     /**
      * @var string $orderBy
      */
-    public $orderBy;
+    protected $orderBy;
 
     /**
-     * @param $limit
+     * @param int $limit
      *
-     * @return mixed|void
+     * @return $this|int
      */
-    public function setLimit($limit)
+    public function setLimit(int $limit)
     {
         $this->limit = $limit;
+        return $this;
     }
 
     /**
-     * @param $offset
+     * @param int $offset
      *
-     * @return mixed|void
+     * @return $this|int
      */
-    public function setOffset($offset)
+    public function setOffset(int $offset)
     {
         $this->offset = $offset;
+        return $this;
     }
 
     /**
-     * @param $orderBy
+     * @param string $orderBy
      *
-     * @return mixed|void
+     * @return $this|string
      */
-    public function setOrder($orderBy)
+    public function setOrderBy(string $orderBy)
     {
         $this->orderBy = $orderBy;
+        return $this;
     }
 
     /**
