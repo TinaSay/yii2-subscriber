@@ -23,6 +23,7 @@ class SubscriberController extends Controller
                 'class' => SaveAction::class,
                 'successUrl' => ['/'],
                 'errorUrl' => ['/'],
+                'messageView' => '@vendor/contrib/yii2-subscriber/mail/subscribe',
             ],
             'unsubscribe' => [
                 'class' => UnsubscribeAction::class,

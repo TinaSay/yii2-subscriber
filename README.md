@@ -132,6 +132,7 @@ Example of usage in SubscriberController:
                 'class' => SaveAction::class,
                 'successUrl' => ['/'],
                 'errorUrl' => ['/'],
+                'messageView' => '@vendor/contrib/yii2-subscriber/mail/subscribe',
             ],
             'unsubscribe' => [
                 'class' => UnsubscribeAction::class,

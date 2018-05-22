@@ -11,7 +11,6 @@ use tina\subscriber\behaviors\TokenBehavior;
 use krok\extend\traits\BlockedAttributeTrait;
 use krok\extend\interfaces\BlockedAttributeInterface;
 use yii\helpers\ArrayHelper;
-use Yii;
 
 /**
  * This is the model class for table "{{%subscriber}}".
@@ -137,19 +136,6 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
         } else {
             return "Ничего не выбрано";
         }
-    }
-
-    /**
-     * formats E-mail message and sends it to subscriber
-     */
-    public function notifications()
-    {
-        $message = Yii::$app->mailer->compose('@vendor/contrib/yii2-subscriber/mail/subscribe', ['model' => $this]);
-        $message
-            ->setFrom(Yii::$app->params['email'])
-            ->setTo($this->email)
-            ->setSubject('Сообщение с сайта ЭНСАЙН')
-            ->send();
     }
 
     /**
