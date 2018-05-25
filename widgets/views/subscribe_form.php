@@ -3,13 +3,13 @@
 
 use tina\subscriber\assets\YandexMapAsset;
 use tina\subscriber\models\Subscriber;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use yii\helpers\Html;
 
 YandexMapAsset::register($this);
 
-$action = Url::to(['/subscriber/subscriber/save']);
+$action = Url::to(['/subscriber/subscriber/save'], true);
 
 /** @var $this \yii\web\View */
 /* @var $list subscriber[] */

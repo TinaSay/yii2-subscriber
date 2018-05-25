@@ -30,7 +30,7 @@ class SubscriberFilter extends BaseObject implements SubscriberFilterInterface
     /**
      * @param int $limit
      *
-     * @return $this|int
+     * @return $this|SubscriberFilterInterface
      */
     public function setLimit(int $limit)
     {
@@ -41,7 +41,7 @@ class SubscriberFilter extends BaseObject implements SubscriberFilterInterface
     /**
      * @param int $offset
      *
-     * @return $this|int
+     * @return $this|SubscriberFilterInterface
      */
     public function setOffset(int $offset)
     {
@@ -50,11 +50,11 @@ class SubscriberFilter extends BaseObject implements SubscriberFilterInterface
     }
 
     /**
-     * @param string $orderBy
+     * @param array $orderBy
      *
-     * @return $this|string
+     * @return $this|SubscriberFilterInterface
      */
-    public function setOrderBy(string $orderBy)
+    public function setOrderBy(array $orderBy)
     {
         $this->orderBy = $orderBy;
         return $this;

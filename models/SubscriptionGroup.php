@@ -2,8 +2,8 @@
 
 namespace tina\subscriber\models;
 
-use krok\extend\behaviors\TimestampBehavior;
 use krok\extend\behaviors\LanguageBehavior;
+use krok\extend\behaviors\TimestampBehavior;
 use krok\extend\interfaces\HiddenAttributeInterface;
 use krok\extend\traits\HiddenAttributeTrait;
 use yii\helpers\ArrayHelper;
@@ -17,6 +17,8 @@ use yii\helpers\ArrayHelper;
  * @property string $language
  * @property string $createdAt
  * @property string $updatedAt
+ *
+ * @property Subscriber subscriber[]
  */
 class SubscriptionGroup extends \yii\db\ActiveRecord implements HiddenAttributeInterface
 {
@@ -89,8 +91,7 @@ class SubscriptionGroup extends \yii\db\ActiveRecord implements HiddenAttributeI
     public function getSubscribers()
     {
         return $this->hasMany(Subscriber::class, ['id' => 'subscriberId'])
-            ->viaTable(SubscriptionGroupAssignment::tableName(),
-                ['groupId' => 'id'])->andWhere([SubscriptionGroup::tableName() . '.[[hidden]]' => self::HIDDEN_NO]);
+            ->viaTable(SubscriptionGroupAssignment::tableName(), ['groupId' => 'id']);
     }
 
     /**

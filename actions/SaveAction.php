@@ -2,9 +2,12 @@
 
 namespace tina\subscriber\actions;
 
-use yii\base\Action;
+use Closure;
+use krok\queue\jobs\MailerJob;
 use tina\subscriber\models\Subscriber;
 use Yii;
+use yii\base\Action;
+use yii\mail\MessageInterface;
 
 /**
  * Class SaveFormAction
@@ -24,9 +27,9 @@ class SaveAction extends Action
     public $errorUrl;
 
     /**
-     * @var string
+     * @var MessageInterface message instance
      */
-    public $messageView;
+    public $message;
 
     /**
      * @return \yii\web\Response
@@ -35,21 +38,16 @@ class SaveAction extends Action
     {
         $model = new Subscriber();
         if ($model->load(Yii::$app->request->post())) {
-            $model->link = Yii::$app->request->getAbsoluteUrl();
+            $model->link = Yii::$app->request->referrer;
             if ($model->save()) {
-                $message = \Yii::$app->getMailer()->compose($this->messageView, [
-                    'model' => $this,
+                if ($this->message instanceof Closure) {
+                    $this->message = call_user_func($this->message, $model);
+                }
+                $job = Yii::createObject([
+                    'class' => MailerJob::class,
+                    'message' => $this->message,
                 ]);
-                $message->setSubject('Сообщение с сайта ЭНСАЙН');
-                $message->setFrom(Yii::$app->params['email']);
-                $message->setTo($model->email);
-
-                $job = \Yii::createObject([
-                    'class' => \krok\queue\jobs\MailerJob::class,
-                    'message' => $message,
-                ]);
-
-                \Yii::$app->get('queue')->push($job);
+                Yii::$app->get('queue')->push($job);
                 return $this->controller->redirect($this->successUrl);
             } else {
                 return $this->controller->redirect($this->errorUrl);

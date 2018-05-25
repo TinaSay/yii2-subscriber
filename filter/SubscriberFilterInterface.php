@@ -12,23 +12,23 @@ interface SubscriberFilterInterface
     /**
      * @param int $limit
      *
-     * @return int
+     * @return SubscriberFilterInterface
      */
     public function setLimit(int $limit);
 
     /**
      * @param int $offset
      *
-     * @return int
+     * @return SubscriberFilterInterface
      */
     public function setOffset(int $offset);
 
     /**
-     * @param string $orderBy
+     * @param array $orderBy
      *
-     * @return string
+     * @return SubscriberFilterInterface
      */
-    public function setOrderBy(string $orderBy);
+    public function setOrderBy(array $orderBy);
 
     /**
      * @param array $params

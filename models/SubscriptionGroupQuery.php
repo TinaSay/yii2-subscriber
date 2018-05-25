@@ -30,7 +30,7 @@ class SubscriptionGroupQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @param null|string $language
+     * @param null $language
      *
      * @return $this
      */
@@ -39,9 +39,7 @@ class SubscriptionGroupQuery extends \yii\db\ActiveQuery
         if ($language === null) {
             $language = Yii::$app->language;
         }
-
-        $this->andWhere(['[[language]]' => $language]);
-
+        $this->andWhere([SubscriptionGroup::tableName() . '.[[language]]' => $language]);
         return $this;
     }
 }

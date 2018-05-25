@@ -120,6 +120,25 @@ $config = [
     ],
 
 ```
+common:
+
+```
+    'definitions' => [
+        \tina\subscriber\actions\SaveAction::class => [
+            'successUrl' => ['/'],
+            'errorUrl' => ['/'],
+            'message' => function (\tina\subscriber\models\Subscriber $model) {
+                $message = Yii::createObject(\tina\subscriber\Message::class);
+                return $message->send($model);
+            },
+        ],
+        \tina\subscriber\actions\UnsubscribeAction::class => [
+            'successUrl' => ['/'],
+            'errorUrl' => ['/'],
+        ],
+    ],
+
+```
 Use:
 ----
 Example of usage in SubscriberController:
@@ -130,14 +149,9 @@ Example of usage in SubscriberController:
         return [
             'save' => [
                 'class' => SaveAction::class,
-                'successUrl' => ['/'],
-                'errorUrl' => ['/'],
-                'messageView' => '@vendor/contrib/yii2-subscriber/mail/subscribe',
             ],
             'unsubscribe' => [
                 'class' => UnsubscribeAction::class,
-                'successUrl' => ['/'],
-                'errorUrl' => ['/'],
             ],
         ];
     }
@@ -168,3 +182,4 @@ Controller:
     ]);
 
 ```
+Message.php - example of MessageInterface Object to be edited as per your message settings 

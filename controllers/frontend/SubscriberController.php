@@ -19,17 +19,14 @@ class SubscriberController extends Controller
     public function actions()
     {
         return [
-            'save' => [
-                'class' => SaveAction::class,
-                'successUrl' => ['/'],
-                'errorUrl' => ['/'],
-                'messageView' => '@vendor/contrib/yii2-subscriber/mail/subscribe',
-            ],
-            'unsubscribe' => [
-                'class' => UnsubscribeAction::class,
-                'successUrl' => ['/'],
-                'errorUrl' => ['/'],
-            ],
+            'save' =>
+                [
+                    'class' => SaveAction::class,
+                ],
+            'unsubscribe' =>
+                [
+                    'class' => UnsubscribeAction::class,
+                ],
         ];
     }
 }
