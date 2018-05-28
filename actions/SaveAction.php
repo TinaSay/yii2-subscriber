@@ -2,7 +2,7 @@
 
 namespace tina\subscriber\actions;
 
-use krok\queue\jobs\MailerJob;
+use krok\queue\mailer\MailerJob;
 use tina\subscriber\models\Subscriber;
 use Yii;
 use yii\base\Action;
