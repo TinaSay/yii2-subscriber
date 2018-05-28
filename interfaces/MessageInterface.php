@@ -3,7 +3,7 @@
 namespace tina\subscriber\interfaces;
 
 use tina\subscriber\models\Subscriber;
-use yii\mail\MailerInterface;
+use yii\base\Action;
 
 /**
  * Interface MessageInterface
@@ -13,16 +13,10 @@ use yii\mail\MailerInterface;
 interface MessageInterface
 {
     /**
-     * MessageInterface constructor.
-     *
-     * @param MailerInterface $mailer
-     */
-    public function __construct(MailerInterface $mailer);
-
-    /**
      * @param Subscriber $model
+     * @param Action $action
      *
      * @return mixed
      */
-    public function send(Subscriber $model);
+    public function make(Subscriber $model, Action $action);
 }

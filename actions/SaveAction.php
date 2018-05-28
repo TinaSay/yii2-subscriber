@@ -2,11 +2,11 @@
 
 namespace tina\subscriber\actions;
 
-use Closure;
 use krok\queue\jobs\MailerJob;
 use tina\subscriber\models\Subscriber;
 use Yii;
 use yii\base\Action;
+use yii\base\InvalidConfigException;
 use yii\mail\MessageInterface;
 
 /**
@@ -33,6 +33,7 @@ class SaveAction extends Action
 
     /**
      * @return \yii\web\Response
+     * @throws InvalidConfigException
      */
     public function run()
     {
@@ -40,14 +41,20 @@ class SaveAction extends Action
         if ($model->load(Yii::$app->request->post())) {
             $model->link = Yii::$app->request->referrer;
             if ($model->save()) {
-                if ($this->message instanceof Closure) {
-                    $this->message = call_user_func($this->message, $model);
+                if (is_callable($this->message)) {
+                    $this->message = call_user_func($this->message, $model, $this);
                 }
-                $job = Yii::createObject([
-                    'class' => MailerJob::class,
-                    'message' => $this->message,
-                ]);
-                Yii::$app->get('queue')->push($job);
+
+                if ($this->message instanceof MessageInterface) {
+                    $job = Yii::createObject([
+                        'class' => MailerJob::class,
+                        'message' => $this->message,
+                    ]);
+                    Yii::$app->get('queue')->push($job);
+                } else {
+                    throw new InvalidConfigException('Invalid data type: ' . get_class($this->message) . '. ' . MessageInterface::class . ' is expected.');
+                }
+
                 return $this->controller->redirect($this->successUrl);
             } else {
                 return $this->controller->redirect($this->errorUrl);

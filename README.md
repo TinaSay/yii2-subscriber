@@ -127,9 +127,9 @@ common:
         \tina\subscriber\actions\SaveAction::class => [
             'successUrl' => ['/'],
             'errorUrl' => ['/'],
-            'message' => function (\tina\subscriber\models\Subscriber $model) {
+            'message' => function (\tina\subscriber\models\Subscriber $model, \yii\base\Action $action) {
                 $message = Yii::createObject(\tina\subscriber\Message::class);
-                return $message->send($model);
+                return $message->make($model, $action);
             },
         ],
         \tina\subscriber\actions\UnsubscribeAction::class => [

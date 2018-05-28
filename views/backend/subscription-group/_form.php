@@ -1,11 +1,10 @@
 <?php
 
+use tina\subscriber\models\SubscriptionGroup;
+
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
-
 /* @var $model tina\subscriber\models\SubscriptionGroup */
-
-use tina\subscriber\models\SubscriptionGroup;
 
 ?>
 

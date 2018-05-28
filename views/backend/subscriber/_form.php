@@ -1,14 +1,13 @@
 <?php
 
+use krok\extend\widgets\YMap\YMapGeocodeWidget;
+use tina\subscriber\assets\YandexMapAsset;
+use tina\subscriber\models\Subscriber;
+use tina\subscriber\models\SubscriptionGroup;
+
 /* @var $this yii\web\View */
 /* @var $form yii\widgets\ActiveForm */
-
 /* @var $model tina\subscriber\models\Subscriber */
-
-use tina\subscriber\assets\YandexMapAsset;
-use tina\subscriber\models\SubscriptionGroup;
-use tina\subscriber\models\Subscriber;
-use krok\extend\widgets\YMap\YMapGeocodeWidget;
 
 YandexMapAsset::register($this);
 
