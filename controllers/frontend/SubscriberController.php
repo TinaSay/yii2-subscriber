@@ -19,14 +19,12 @@ class SubscriberController extends Controller
     public function actions()
     {
         return [
-            'save' =>
-                [
-                    'class' => SaveAction::class,
-                ],
-            'unsubscribe' =>
-                [
-                    'class' => UnsubscribeAction::class,
-                ],
+            'save' => [
+                'class' => SaveAction::class,
+            ],
+            'unsubscribe' => [
+                'class' => UnsubscribeAction::class,
+            ],
         ];
     }
 }
