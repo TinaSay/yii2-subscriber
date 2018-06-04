@@ -170,7 +170,7 @@ Controller:
     $subscriberFilter = new SubscriberFilter();
 
     $query = $subscriberFilter->filter([
-        ['column' => 'value'],
+        'column' => 'value',
     ]);
     
     // or operator format
