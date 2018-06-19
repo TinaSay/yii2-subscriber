@@ -35,7 +35,7 @@ $config = [
     'modules' => [
         'subscriber' => [
             'class' => \tina\subscriber\Module::class,
-            'viewPath' => '@tina/subscriber/views/backend',
+            'viewPath' => '@vendor/contrib/yii2-subscriber/views/backend',
             'controllerNamespace' => 'tina\subscriber\controllers\backend',
         ],
     ],
@@ -114,7 +114,7 @@ $config = [
     'modules' => [
         'subscriber' => [
             'class' => \tina\subscriber\Module::class,
-            'viewPath' => '@tina/subscriber/views/frontend',
+            'viewPath' => '@vendor/contrib/yii2-subscriber/views/frontend',
             'controllerNamespace' => 'tina\subscriber\controllers\frontend',
         ],
     ],
@@ -136,6 +136,7 @@ common:
             'successUrl' => ['/'],
             'errorUrl' => ['/'],
         ],
+        \tina\subscriber\filter\SubscriberFilterInterface::class=>\tina\subscriber\filter\SubscriberFilter::class,
     ],
 
 ```
@@ -164,18 +165,27 @@ View:
 Use filter:
 ---
 
-Controller:
+DI:
 
 ```
-    $subscriberFilter = new SubscriberFilter();
+    protected $subscriberFilter;
 
-    $query = $subscriberFilter->filter([
+    public function __construct(SubscriberFilterInterface $subscriberFilter)
+    {
+        $this->subscriberFilter = $subscriberFilter;
+    }
+```
+To select particular columns use:
+```
+    $query = $this->subscriberFilter->filter([
         'column' => 'value',
     ]);
     
-    // or operator format
-    
-    $query = $subscriberFilter->filter([
+```
+To select particular columns with additional conditions use:
+
+```    
+    $query = $this->subscriberFilter->filter([
         'and',
         ['column' => 'value'],
         ['like', 'column', 'value'],
