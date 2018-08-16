@@ -31,15 +31,17 @@ $config = [
 ]
 
 ```
+
 ```
     'modules' => [
         'subscriber' => [
             'class' => \tina\subscriber\Module::class,
-            'viewPath' => '@vendor/contrib/yii2-subscriber/views/backend',
+            'viewPath' => '@tina/subscriber/views/backend',
             'controllerNamespace' => 'tina\subscriber\controllers\backend',
         ],
     ],
 ```
+
 params:
 
 ```
@@ -60,6 +62,7 @@ params:
         ],
     ],
 ```
+
 console:
 
 ```
@@ -68,10 +71,11 @@ console:
         'migrationTable' => '{{%migration}}',
         'interactive' => false,
         'migrationPath' => [
-            '@vendor/contrib/yii2-subscriber/migrations',
+            '@tina/subscriber/migrations',
         ],
     ],
 ```
+
 ...
 
 ```
@@ -97,6 +101,7 @@ console:
         ],
     ],
 ```
+
 frontend:
 
 ```
@@ -108,18 +113,20 @@ $config = [
 ]
 
 ```
+
 ...
 
 ```
     'modules' => [
         'subscriber' => [
             'class' => \tina\subscriber\Module::class,
-            'viewPath' => '@vendor/contrib/yii2-subscriber/views/frontend',
+            'viewPath' => '@tina/subscriber/views/frontend',
             'controllerNamespace' => 'tina\subscriber\controllers\frontend',
         ],
     ],
 
 ```
+
 common:
 
 ```
@@ -140,8 +147,10 @@ common:
     ],
 
 ```
+
 Use:
 ----
+
 Example of usage in SubscriberController:
 
 ```
@@ -157,11 +166,13 @@ Example of usage in SubscriberController:
         ];
     }
 ```
+
 View:
 
 ```
 <?= tina\subscriber\widgets\SubscriberWidget::widget(); ?>
 ```
+
 Use filter:
 ---
 
@@ -175,13 +186,16 @@ DI:
         $this->subscriberFilter = $subscriberFilter;
     }
 ```
+
 To select particular columns use:
+
 ```
     $query = $this->subscriberFilter->filter([
         'column' => 'value',
     ]);
     
 ```
+
 To select particular columns with additional conditions use:
 
 ```    
@@ -192,4 +206,5 @@ To select particular columns with additional conditions use:
     ]);
 
 ```
+
 Message.php - example of MessageInterface Object to be edited as per your message settings 
