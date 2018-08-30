@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
 YandexMapAsset::register($this);
 
-$action = Url::to(['/subscriber/subscriber/save'], true);
+$action = Url::to(['/subscriber/subscriber/save']);
 
 $this->registerJs(new \yii\web\JsExpression('jQuery("#country").addClass("country-yandex")'));
 $this->registerJs(new \yii\web\JsExpression('jQuery("#city").addClass("city-yandex");'));
