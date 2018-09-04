@@ -31,9 +31,9 @@ interface SubscriberFilterInterface
     public function setOrderBy(array $orderBy);
 
     /**
-     * @param array $params
+     * @param array $condition
      *
      * @return array
      */
-    public function filter(array $params);
+    public function filter(array $condition);
 }
