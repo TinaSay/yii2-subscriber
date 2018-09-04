@@ -28,7 +28,7 @@ use yii\helpers\ArrayHelper;
  * @property string $createdAt
  * @property string $updatedAt
  *
- * @property SubscriptionGroup[] $groupRelation
+ * @property SubscriptionGroup[] $groupsRelation
  */
 class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterface, ActiveAttributeInterface
 {
@@ -118,7 +118,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getGroupRelation()
+    public function getGroupsRelation()
     {
         return $this->hasMany(SubscriptionGroup::class, ['id' => 'groupId'])
             ->viaTable(SubscriptionAssignment::tableName(),
@@ -130,11 +130,11 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
      */
     public function getGroupsString()
     {
-        $list = ArrayHelper::getColumn($this->groupRelation, 'title');
+        $list = ArrayHelper::getColumn($this->groupsRelation, 'title');
         if (count($list) > 0) {
             return implode(', ', $list);
         } else {
-            return "Ничего не выбрано";
+            return null;
         }
     }
 

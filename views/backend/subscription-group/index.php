@@ -1,9 +1,9 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
 use krok\extend\grid\DatePickerColumn;
 use krok\extend\grid\HiddenColumn;
+use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel tina\subscriber\models\SubscriptionGroupSearch */
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
+                ['class' => 'yii\grid\ActionColumn'],
                 'id',
                 'title',
                 [
@@ -49,7 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => DatePickerColumn::class,
                     'attribute' => 'updatedAt',
                 ],
-                ['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>
 

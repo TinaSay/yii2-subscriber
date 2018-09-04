@@ -1,12 +1,12 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
-use krok\extend\grid\DatePickerColumn;
 use krok\extend\grid\BlockedColumn;
+use krok\extend\grid\DatePickerColumn;
 use tina\subscriber\components\ActiveColumn;
-use tina\subscriber\models\SubscriptionGroup;
 use tina\subscriber\models\Subscriber;
+use tina\subscriber\models\SubscriptionGroup;
+use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel tina\subscriber\models\SubscriberSearch */
@@ -37,12 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
-
+                ['class' => 'yii\grid\ActionColumn'],
                 'id',
                 'email:email',
                 'country',
                 'city',
-                'coordinates',
                 'ip',
                 'link',
                 [
@@ -69,7 +68,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => DatePickerColumn::class,
                     'attribute' => 'updatedAt',
                 ],
-                ['class' => 'yii\grid\ActionColumn'],
             ],
         ]); ?>
 
