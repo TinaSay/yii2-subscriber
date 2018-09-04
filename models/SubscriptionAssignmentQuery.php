@@ -3,15 +3,15 @@
 namespace tina\subscriber\models;
 
 /**
- * This is the ActiveQuery class for [[SubscriptionGroupAssignment]].
+ * This is the ActiveQuery class for [[SubscriptionAssignment]].
  *
- * @see SubscriptionGroupAssignment
+ * @see SubscriptionAssignment
  */
-class SubscriptionGroupAssignmentQuery extends \yii\db\ActiveQuery
+class SubscriptionAssignmentQuery extends \yii\db\ActiveQuery
 {
     /**
      * @inheritdoc
-     * @return SubscriptionGroupAssignment[]|array
+     * @return SubscriptionAssignment[]|array
      */
     public function all($db = null)
     {
@@ -20,7 +20,7 @@ class SubscriptionGroupAssignmentQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return SubscriptionGroupAssignment|array|null
+     * @return SubscriptionAssignment|array|null
      */
     public function one($db = null)
     {

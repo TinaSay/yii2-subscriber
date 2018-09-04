@@ -91,7 +91,7 @@ class SubscriptionGroup extends \yii\db\ActiveRecord implements HiddenAttributeI
     public function getSubscribers()
     {
         return $this->hasMany(Subscriber::class, ['id' => 'subscriberId'])
-            ->viaTable(SubscriptionGroupAssignment::tableName(), ['groupId' => 'id']);
+            ->viaTable(SubscriptionAssignment::tableName(), ['groupId' => 'id']);
     }
 
     /**

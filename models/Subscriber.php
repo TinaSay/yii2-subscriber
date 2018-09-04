@@ -121,7 +121,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
     public function getGroupRelation()
     {
         return $this->hasMany(SubscriptionGroup::class, ['id' => 'groupId'])
-            ->viaTable(SubscriptionGroupAssignment::tableName(),
+            ->viaTable(SubscriptionAssignment::tableName(),
                 ['subscriberId' => 'id']);
     }
 

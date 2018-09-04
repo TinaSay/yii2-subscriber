@@ -39,7 +39,9 @@ class SubscriptionGroupQuery extends \yii\db\ActiveQuery
         if ($language === null) {
             $language = Yii::$app->language;
         }
+
         $this->andWhere([SubscriptionGroup::tableName() . '.[[language]]' => $language]);
+
         return $this;
     }
 }

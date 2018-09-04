@@ -12,7 +12,7 @@ namespace tina\subscriber\models;
  * @property SubscriptionGroup $group
  * @property Subscriber $subscriber
  */
-class SubscriptionGroupAssignment extends \yii\db\ActiveRecord
+class SubscriptionAssignment extends \yii\db\ActiveRecord
 {
     /**
      * @return array
@@ -87,10 +87,10 @@ class SubscriptionGroupAssignment extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return SubscriptionGroupAssignmentQuery the active query used by this AR class.
+     * @return SubscriptionAssignmentQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new SubscriptionGroupAssignmentQuery(get_called_class());
+        return new SubscriptionAssignmentQuery(get_called_class());
     }
 }
