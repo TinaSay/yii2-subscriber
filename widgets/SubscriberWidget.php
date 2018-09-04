@@ -2,8 +2,8 @@
 
 namespace tina\subscriber\widgets;
 
-use yii\base\Widget;
 use tina\subscriber\models\Subscriber;
+use yii\base\Widget;
 
 /**
  * Class SubscriberWidget
@@ -12,7 +12,9 @@ use tina\subscriber\models\Subscriber;
  */
 class SubscriberWidget extends Widget
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     public $view = 'subscribe_form';
 
     /**
@@ -21,6 +23,7 @@ class SubscriberWidget extends Widget
     public function run()
     {
         $model = new Subscriber();
+
         return $this->render($this->view, [
             'model' => $model,
         ]);

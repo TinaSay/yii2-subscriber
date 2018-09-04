@@ -4,21 +4,20 @@ use tina\subscriber\assets\YandexMapAsset;
 use tina\subscriber\models\Subscriber;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
-/** @var $model Subscriber */
 /** @var $this \yii\web\View */
-/* @var $list subscriber[] */
+/** @var $model Subscriber */
 
 YandexMapAsset::register($this);
 
 $action = Url::to(['/subscriber/subscriber/save']);
 
-$this->registerJs(new \yii\web\JsExpression('jQuery("#country").addClass("country-yandex")'));
-$this->registerJs(new \yii\web\JsExpression('jQuery("#city").addClass("city-yandex");'));
-$this->registerJs(new \yii\web\JsExpression('jQuery("#coordinates").addClass("coordinates-yandex");'));
+$this->registerJs(new JsExpression('jQuery("#country").addClass("country-yandex")'));
+$this->registerJs(new JsExpression('jQuery("#city").addClass("city-yandex");'));
+$this->registerJs(new JsExpression('jQuery("#coordinates").addClass("coordinates-yandex");'));
 ?>
-
 <div class="contactform col-md-4">
 
     <?php $form = ActiveForm::begin(['action' => $action]); ?>
@@ -32,6 +31,7 @@ $this->registerJs(new \yii\web\JsExpression('jQuery("#coordinates").addClass("co
     <div class="form-group">
         <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary']) ?>
     </div>
+
     <?php ActiveForm::end(); ?>
 
 </div>

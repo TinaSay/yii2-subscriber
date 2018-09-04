@@ -2,12 +2,13 @@
 
 namespace tina\subscriber\controllers\backend;
 
-use Yii;
+use krok\system\components\backend\Controller;
 use tina\subscriber\models\Subscriber;
 use tina\subscriber\models\SubscriberSearch;
-use krok\system\components\backend\Controller;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * SubscriberController implements the CRUD actions for Subscriber model.
@@ -30,14 +31,12 @@ class SubscriberController extends Controller
     }
 
     /**
-     * Lists all Subscriber models.
-     *
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
         $searchModel = new SubscriberSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams());
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -49,7 +48,6 @@ class SubscriberController extends Controller
      * @param $id
      *
      * @return string
-     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -59,13 +57,15 @@ class SubscriberController extends Controller
     }
 
     /**
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionCreate()
     {
         $model = new Subscriber();
+
         $model->detachBehavior('IpBehavior');
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -77,14 +77,13 @@ class SubscriberController extends Controller
     /**
      * @param $id
      *
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException
+     * @return string|Response
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -96,11 +95,7 @@ class SubscriberController extends Controller
     /**
      * @param $id
      *
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException
-     * @throws \Exception
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @return Response
      */
     public function actionDelete($id)
     {

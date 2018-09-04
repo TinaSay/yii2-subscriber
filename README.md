@@ -170,7 +170,7 @@ Example of usage in SubscriberController:
 View:
 
 ```
-<?= tina\subscriber\widgets\SubscriberWidget::widget(); ?>
+<?= \tina\subscriber\widgets\SubscriberWidget::widget(); ?>
 ```
 
 Use filter:

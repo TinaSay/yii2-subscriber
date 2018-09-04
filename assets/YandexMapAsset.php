@@ -16,7 +16,7 @@ class YandexMapAsset extends AssetBundle
     /**
      * @var string
      */
-    public $sourcePath = '@vendor/contrib/yii2-subscriber/assets/dist';
+    public $sourcePath = '@tina/subscriber/assets/dist';
 
     /**
      * @var array

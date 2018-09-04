@@ -2,10 +2,11 @@
 
 namespace tina\subscriber\behaviors;
 
-use yii\behaviors\AttributeBehavior;
-use yii\db\ActiveRecord;
 use Closure;
 use Yii;
+use yii\base\Event;
+use yii\behaviors\AttributeBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * Class TokenBehavior
@@ -14,10 +15,14 @@ use Yii;
  */
 class TokenBehavior extends AttributeBehavior
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     public $attribute = 'token';
 
-    /** @var string */
+    /**
+     * @var integer
+     */
     public $stringLength;
 
     public function init()
@@ -32,7 +37,7 @@ class TokenBehavior extends AttributeBehavior
     }
 
     /**
-     * @param \yii\base\Event $event
+     * @param Event $event
      *
      * @return mixed|string
      */

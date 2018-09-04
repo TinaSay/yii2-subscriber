@@ -2,14 +2,14 @@
 
 namespace tina\subscriber\models;
 
+use krok\extend\behaviors\IpBehavior;
 use krok\extend\behaviors\TimestampBehavior;
+use krok\extend\interfaces\BlockedAttributeInterface;
+use krok\extend\traits\BlockedAttributeTrait;
+use tina\subscriber\behaviors\TokenBehavior;
 use tina\subscriber\components\ActiveAttributeInterface;
 use tina\subscriber\components\ActiveAttributeTrait;
 use voskobovich\behaviors\ManyToManyBehavior;
-use krok\extend\behaviors\IpBehavior;
-use tina\subscriber\behaviors\TokenBehavior;
-use krok\extend\traits\BlockedAttributeTrait;
-use krok\extend\interfaces\BlockedAttributeInterface;
 use yii\helpers\ArrayHelper;
 
 /**

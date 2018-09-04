@@ -14,6 +14,10 @@
         {
             "name": "tina",
             "email": "sayapina.tina@gmail.com"
+        },
+        {
+            "name": "krok",
+            "email": "yii2.developer@gmail.com"
         }
     ],
     "repositories": [
@@ -31,8 +35,8 @@
         "yiisoft/yii2": "~2.0.12",
         "yii2-developer/yii2-extend": "~1.0.0",
         "yii2-developer/yii2-system": "~1.0.0",
-        "voskobovich/yii2-many-many-behavior": "~3.0",
-        "yii2-developer/yii2-queue": "~0.1.0"
+        "yii2-developer/yii2-queue": "~0.1.0",
+        "voskobovich/yii2-many-many-behavior": "~3.0"
     },
     "extra": {
         "branch-alias": {

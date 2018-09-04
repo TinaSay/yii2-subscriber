@@ -7,6 +7,7 @@ use tina\subscriber\models\Subscriber;
 use Yii;
 use yii\base\Action;
 use yii\mail\MailerInterface;
+use yii\mail\MessageInterface as BaseMessageInterface;
 
 /**
  * Class Message
@@ -34,14 +35,15 @@ class Message implements MessageInterface
      * @param Subscriber $model
      * @param Action $action
      *
-     * @return mixed|\yii\mail\MessageInterface
+     * @return BaseMessageInterface
      */
-    public function make(Subscriber $model, Action $action)
+    public function make(Subscriber $model, Action $action): BaseMessageInterface
     {
-        $message = $this->mailer->compose('@vendor/contrib/yii2-subscriber/mail/subscribe', [
+        $message = $this->mailer->compose('@tina/subscriber/mail/subscribe', [
             'model' => $model,
         ]);
-        $message->setSubject('Сообщение с сайта ЭНСАЙН');
+
+        $message->setSubject('Сообщение с сайта');
         $message->setFrom(Yii::$app->params['email']);
         $message->setTo($model->email);
 

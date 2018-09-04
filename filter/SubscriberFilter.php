@@ -3,14 +3,13 @@
 namespace tina\subscriber\filter;
 
 use tina\subscriber\models\Subscriber;
-use yii\base\BaseObject;
 
 /**
  * Class SubscriberFilter
  *
  * @package tina\subscriber\filter
  */
-class SubscriberFilter extends BaseObject implements SubscriberFilterInterface
+class SubscriberFilter implements SubscriberFilterInterface
 {
     /**
      * @var int $limit
@@ -35,6 +34,7 @@ class SubscriberFilter extends BaseObject implements SubscriberFilterInterface
     public function setLimit(int $limit)
     {
         $this->limit = $limit;
+
         return $this;
     }
 
@@ -46,6 +46,7 @@ class SubscriberFilter extends BaseObject implements SubscriberFilterInterface
     public function setOffset(int $offset)
     {
         $this->offset = $offset;
+
         return $this;
     }
 
@@ -57,18 +58,19 @@ class SubscriberFilter extends BaseObject implements SubscriberFilterInterface
     public function setOrderBy(array $orderBy)
     {
         $this->orderBy = $orderBy;
+
         return $this;
     }
 
     /**
-     * @param array $params
+     * @param array $condition
      *
      * @return array|Subscriber[]
      */
-    public function filter(array $params)
+    public function filter(array $condition)
     {
         return Subscriber::find()
-            ->where($params)
+            ->where($condition)
             ->limit($this->limit)
             ->offset($this->offset)
             ->orderBy($this->orderBy)

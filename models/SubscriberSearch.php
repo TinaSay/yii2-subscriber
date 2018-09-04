@@ -17,7 +17,7 @@ class SubscriberSearch extends Subscriber
     {
         return [
             [['id', 'blocked', 'active'], 'integer'],
-            [['email', 'country', 'city', 'ip', 'link', 'createdAt', 'updatedAt', 'token'], 'safe'],
+            [['email', 'country', 'city', 'ip', 'link', 'createdAt', 'updatedAt'], 'safe'],
         ];
     }
 

@@ -2,9 +2,10 @@
 
 namespace tina\subscriber\actions;
 
-use yii\base\Action;
 use tina\subscriber\models\Subscriber;
+use yii\base\Action;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * Class UnsubscribeAction
@@ -17,24 +18,28 @@ class UnsubscribeAction extends Action
      * @var string|array
      */
     public $successUrl;
+
     /**
      * @var string|array
      */
     public $errorUrl;
 
     /**
-     * @param $token
+     * @param string $token
      *
-     * @return array|string
+     * @return Response
      * @throws NotFoundHttpException
      */
-    public function run($token)
+    public function run(string $token)
     {
         $model = Subscriber::find()->where(['token' => $token])->one();
-        if ($model == null) {
+
+        if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-        $model->active = $model::ACTIVE_NO;
+
+        $model->active = Subscriber::ACTIVE_NO;
+
         if ($model->save()) {
             return $this->controller->redirect($this->successUrl);
         } else {

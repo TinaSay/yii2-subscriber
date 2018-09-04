@@ -13,7 +13,7 @@ use yii\grid\DataColumn;
 /**
  * Class ActiveColumn
  *
- * @package tina\subscriber\grid
+ * @package tina\subscriber\components
  */
 class ActiveColumn extends DataColumn
 {
@@ -36,6 +36,7 @@ class ActiveColumn extends DataColumn
                 return $model->getActive();
             }
         }
+
         return parent::getDataCellValue($model, $key, $index);
     }
 
@@ -50,6 +51,7 @@ class ActiveColumn extends DataColumn
                 $this->filter = $filterModel::getActiveList();
             }
         }
+
         return parent::renderFilterCellContent();
     }
 }

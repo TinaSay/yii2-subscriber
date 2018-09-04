@@ -8,9 +8,10 @@ use Yii;
 use yii\base\Action;
 use yii\base\InvalidConfigException;
 use yii\mail\MessageInterface;
+use yii\web\Response;
 
 /**
- * Class SaveFormAction
+ * Class SaveAction
  *
  * @package tina\subscriber\actions
  */
@@ -32,14 +33,16 @@ class SaveAction extends Action
     public $message;
 
     /**
-     * @return \yii\web\Response
+     * @return Response
      * @throws InvalidConfigException
      */
     public function run()
     {
         $model = new Subscriber();
-        if ($model->load(Yii::$app->request->post())) {
-            $model->link = Yii::$app->request->referrer;
+
+        if ($model->load(Yii::$app->getRequest()->post())) {
+            $model->link = Yii::$app->getRequest()->getReferrer();
+
             if ($model->save()) {
                 if (is_callable($this->message)) {
                     $this->message = call_user_func($this->message, $model, $this);
@@ -50,6 +53,7 @@ class SaveAction extends Action
                         'class' => MailerJob::class,
                         'message' => $this->message,
                     ]);
+
                     Yii::$app->get('queue')->push($job);
                 } else {
                     throw new InvalidConfigException('Invalid data type: ' . get_class($this->message) . '. ' . MessageInterface::class . ' is expected.');
