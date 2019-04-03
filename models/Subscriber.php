@@ -57,7 +57,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             'ManyToManyBehavior' => [
                 'class' => ManyToManyBehavior::class,
                 'relations' => [
-                    'groupIDs' => 'groupRelation',
+                    'groupIDs' => 'groupsRelation',
                 ],
             ],
             'IpBehavior' => [
