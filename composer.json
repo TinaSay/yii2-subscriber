@@ -45,7 +45,7 @@
     },
     "autoload": {
         "psr-4": {
-            "tina\\subscriber\\": ""
+            "tina\\subscriber\\": "src"
         }
     }
 }
