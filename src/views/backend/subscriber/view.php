@@ -42,7 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'country',
                 'city',
                 'coordinates',
-                'ip',
+                [
+                    'attribute' => 'ip',
+                    'value' => long2ip($model->ip),
+                ],
                 'link:url',
                 'blocked:boolean',
                 'active:boolean',

@@ -81,21 +81,28 @@ console:
 ```
     'config' => [
         [
+            'label' => 'Subscriber',
             'name' => 'subscriber',
             'controllers' => [
                 'subscriber' => [
-                    'index',
-                    'create',
-                    'update',
-                    'view',
-                    'delete',
+                    'label' => 'Subscriber',
+                    'actions' => [
+                        'index',
+                        'create',
+                        'update',
+                        'view',
+                        'delete',
+                    ],
                 ],
                 'subscription-group' => [
-                    'index',
-                    'create',
-                    'update',
-                    'view',
-                    'delete',
+                    'label' => 'Subscription Group',
+                    'actions' => [
+                        'index',
+                        'create',
+                        'update',
+                        'view',
+                        'delete',
+                    ],
                 ],
             ],
         ],

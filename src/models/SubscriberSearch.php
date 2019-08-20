@@ -66,7 +66,7 @@ class SubscriberSearch extends Subscriber
             ->andFilterWhere(['like', Subscriber::tableName() . '.[[email]]', $this->email])
             ->andFilterWhere(['like', Subscriber::tableName() . '.[[country]]', $this->country])
             ->andFilterWhere(['like', Subscriber::tableName() . '.[[city]]', $this->city])
-            ->andFilterWhere(['like', Subscriber::tableName() . '.[[ip]]', $this->ip])
+            ->andFilterWhere(['like', Subscriber::tableName() . '.[[ip]]', $this->ip ? ip2long($this->ip) : null])
             ->andFilterWhere(['like', Subscriber::tableName() . '.[[link]]', $this->link])
             ->andFilterWhere(['like', Subscriber::tableName() . '.[[createdAt]]', $this->createdAt])
             ->andFilterWhere(['like', Subscriber::tableName() . '.[[updatedAt]]', $this->updatedAt]);

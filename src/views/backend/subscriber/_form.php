@@ -30,7 +30,7 @@ ymaps.geocode(coords).then(function (result) {
 
 <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'groupIDs')->widget(Select2Widget::class, [
+<?= $form->field($model, 'groupIds')->widget(Select2Widget::class, [
     'items' => SubscriptionGroup::asDropDown(),
     'options' => [
         'multiple' => true,

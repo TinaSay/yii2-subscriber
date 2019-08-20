@@ -42,7 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'email:email',
                 'country',
                 'city',
-                'ip',
+                [
+                    'attribute' => 'ip',
+                    'value' => function (Subscriber $model) {
+                        return long2ip($model->ip);
+                    },
+                ],
                 'link',
                 [
                     'class' => BlockedColumn::class,
