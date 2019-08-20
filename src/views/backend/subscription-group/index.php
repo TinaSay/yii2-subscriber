@@ -1,7 +1,7 @@
 <?php
 
-use krok\extend\grid\DatePickerColumn;
-use krok\extend\grid\HiddenColumn;
+use krok\grid\DatePickerColumn;
+use krok\grid\HiddenColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 

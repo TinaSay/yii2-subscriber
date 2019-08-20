@@ -9,8 +9,8 @@ namespace tina\subscriber\models;
  * @property integer $subscriberId
  * @property integer $groupId
  *
- * @property SubscriptionGroup $group
- * @property Subscriber $subscriber
+ * @property SubscriptionGroup $groupRelation
+ * @property Subscriber $subscriberRelation
  */
 class SubscriptionAssignment extends \yii\db\ActiveRecord
 {
@@ -44,14 +44,14 @@ class SubscriptionAssignment extends \yii\db\ActiveRecord
                 ['groupId'],
                 'exist',
                 'skipOnError' => true,
-                'targetClass' => SubscriptionGroup::className(),
+                'targetClass' => SubscriptionGroup::class,
                 'targetAttribute' => ['groupId' => 'id'],
             ],
             [
                 ['subscriberId'],
                 'exist',
                 'skipOnError' => true,
-                'targetClass' => Subscriber::className(),
+                'targetClass' => Subscriber::class,
                 'targetAttribute' => ['subscriberId' => 'id'],
             ],
         ];
@@ -72,17 +72,17 @@ class SubscriptionAssignment extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getGroup()
+    public function getGroupRelation()
     {
-        return $this->hasOne(SubscriptionGroup::className(), ['id' => 'groupId']);
+        return $this->hasOne(SubscriptionGroup::class, ['id' => 'groupId']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubscriber()
+    public function getSubscriberRelation()
     {
-        return $this->hasOne(Subscriber::className(), ['id' => 'subscriberId']);
+        return $this->hasOne(Subscriber::class, ['id' => 'subscriberId']);
     }
 
     /**

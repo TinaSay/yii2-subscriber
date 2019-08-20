@@ -8,7 +8,7 @@
 
 namespace tina\subscriber\components;
 
-use yii\grid\DataColumn;
+use krok\grid\DataColumn;
 
 /**
  * Class ActiveColumn

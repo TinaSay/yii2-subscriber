@@ -39,7 +39,7 @@ class Message implements MessageInterface
      */
     public function make(Subscriber $model, Action $action): BaseMessageInterface
     {
-        $message = $this->mailer->compose('@tina/subscriber/mail/subscribe', [
+        $message = $this->mailer->compose('@tina/subscriber/mail/subscribe.php', [
             'model' => $model,
         ]);
 

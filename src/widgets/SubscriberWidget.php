@@ -15,7 +15,7 @@ class SubscriberWidget extends Widget
     /**
      * @var string
      */
-    public $view = 'subscribe_form';
+    public $template = 'subscribe_form.php';
 
     /**
      * @return string
@@ -24,7 +24,7 @@ class SubscriberWidget extends Widget
     {
         $model = new Subscriber();
 
-        return $this->render($this->view, [
+        return $this->render($this->template, [
             'model' => $model,
         ]);
     }

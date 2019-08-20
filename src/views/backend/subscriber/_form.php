@@ -1,6 +1,7 @@
 <?php
 
 use krok\extend\widgets\YMap\YMapGeocodeWidget;
+use krok\select2\Select2Widget;
 use tina\subscriber\assets\YandexMapAsset;
 use tina\subscriber\models\Subscriber;
 use tina\subscriber\models\SubscriptionGroup;
@@ -29,18 +30,23 @@ ymaps.geocode(coords).then(function (result) {
 
 <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'groupIDs')->dropDownList(SubscriptionGroup::asDropDown(), [
-    'multiple' => true,
-    'data-live-search' => 'true',
-    'data-actions-box' => 'true',
+<?= $form->field($model, 'groupIDs')->widget(Select2Widget::class, [
+    'items' => SubscriptionGroup::asDropDown(),
+    'options' => [
+        'multiple' => true,
+    ],
 ]) ?>
 
-<?= $form->field($model, 'coordinates')->widget(YMapGeocodeWidget::className(), ['selector' => 'map']) ?>
+<?= $form->field($model, 'coordinates')->widget(YMapGeocodeWidget::class, ['selector' => 'map']) ?>
 
 <?= $form->field($model, 'city')->textInput(['maxlength' => true, 'class' => ['yandex-city', 'form-control']]) ?>
 
 <?= $form->field($model, 'country')->textInput(['maxlength' => true, 'class' => ['yandex-country', 'form-control']]) ?>
 
-<?= $form->field($model, 'blocked')->dropDownList(Subscriber::getBlockedList()) ?>
+<?= $form->field($model, 'blocked')->widget(Select2Widget::class, [
+    'items' => Subscriber::getBlockedList(),
+]) ?>
 
-<?= $form->field($model, 'active')->dropDownList(Subscriber::getActiveList()) ?>
+<?= $form->field($model, 'active')->widget(Select2Widget::class, [
+    'items' => Subscriber::getActiveList(),
+]) ?>

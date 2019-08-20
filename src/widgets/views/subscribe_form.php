@@ -3,7 +3,6 @@
 use tina\subscriber\assets\YandexMapAsset;
 use tina\subscriber\models\Subscriber;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
@@ -12,15 +11,13 @@ use yii\widgets\ActiveForm;
 
 YandexMapAsset::register($this);
 
-$action = Url::to(['/subscriber/subscriber/save']);
-
 $this->registerJs(new JsExpression('jQuery("#country").addClass("country-yandex")'));
 $this->registerJs(new JsExpression('jQuery("#city").addClass("city-yandex");'));
 $this->registerJs(new JsExpression('jQuery("#coordinates").addClass("coordinates-yandex");'));
 ?>
 <div class="contactform col-md-4">
 
-    <?php $form = ActiveForm::begin(['action' => $action]); ?>
+    <?php $form = ActiveForm::begin(['action' => ['/subscriber/subscriber/save']]); ?>
 
     <?= $form->field($model, 'email') ?>
 

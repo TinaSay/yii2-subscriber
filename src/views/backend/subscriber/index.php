@@ -1,7 +1,7 @@
 <?php
 
-use krok\extend\grid\BlockedColumn;
-use krok\extend\grid\DatePickerColumn;
+use krok\grid\BlockedColumn;
+use krok\grid\DatePickerColumn;
 use tina\subscriber\components\ActiveColumn;
 use tina\subscriber\models\Subscriber;
 use tina\subscriber\models\SubscriptionGroup;

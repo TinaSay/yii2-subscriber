@@ -2,7 +2,6 @@
 
 namespace tina\subscriber\behaviors;
 
-use Closure;
 use Yii;
 use yii\base\Event;
 use yii\behaviors\AttributeBehavior;
@@ -23,7 +22,7 @@ class TokenBehavior extends AttributeBehavior
     /**
      * @var integer
      */
-    public $stringLength;
+    public $stringLength = 128;
 
     public function init()
     {
@@ -43,7 +42,7 @@ class TokenBehavior extends AttributeBehavior
      */
     protected function getValue($event)
     {
-        return $this->value instanceof Closure ? call_user_func($this->value,
+        return is_callable($this->value) ? call_user_func($this->value,
             $event) : Yii::$app->getSecurity()->generateRandomString($this->stringLength);
     }
 }

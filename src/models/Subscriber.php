@@ -4,8 +4,8 @@ namespace tina\subscriber\models;
 
 use krok\extend\behaviors\IpBehavior;
 use krok\extend\behaviors\TimestampBehavior;
-use krok\extend\interfaces\BlockedAttributeInterface;
-use krok\extend\traits\BlockedAttributeTrait;
+use krok\grid\interfaces\BlockedAttributeInterface;
+use krok\grid\traits\BlockedAttributeTrait;
 use tina\subscriber\behaviors\TokenBehavior;
 use tina\subscriber\components\ActiveAttributeInterface;
 use tina\subscriber\components\ActiveAttributeTrait;
