@@ -7,9 +7,9 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $model tina\subscriber\models\Subscriber */
 
-$this->title = Yii::t('system', 'Update') . ' : ' . $model->id;
+$this->title = Yii::t('system', 'Update') . ' : ' . $model->email;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('system', 'Subscriber'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->email, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('system', 'Update');
 ?>
 <div class="card">
