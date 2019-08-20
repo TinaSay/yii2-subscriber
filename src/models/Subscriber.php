@@ -111,7 +111,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             'token' => 'Токен',
             'createdAt' => 'Добавлен',
             'updatedAt' => 'Обновлен',
-            'groupIDs' => 'Группы рассылок',
+            'groupIds' => 'Группы рассылок',
         ];
     }
 

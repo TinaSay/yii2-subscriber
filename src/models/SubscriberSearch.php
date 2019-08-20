@@ -11,12 +11,17 @@ use yii\data\ActiveDataProvider;
 class SubscriberSearch extends Subscriber
 {
     /**
+     * @var int
+     */
+    public $groupIds;
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'blocked', 'active'], 'integer'],
+            [['id', 'groupIds', 'blocked', 'active'], 'integer'],
             [['email', 'country', 'city', 'ip', 'link', 'createdAt', 'updatedAt'], 'safe'],
         ];
     }
@@ -38,7 +43,7 @@ class SubscriberSearch extends Subscriber
      */
     public function search($params)
     {
-        $query = Subscriber::find();
+        $query = Subscriber::find()->joinWith('groupsRelation');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -51,18 +56,20 @@ class SubscriberSearch extends Subscriber
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'blocked' => $this->blocked,
-            'active' => $this->active,
+            Subscriber::tableName() . '.[[id]]' => $this->id,
+            SubscriptionGroup::tableName() . '.[[id]]' => $this->groupIds,
+            Subscriber::tableName() . '.[[blocked]]' => $this->blocked,
+            Subscriber::tableName() . '.[[active]]' => $this->active,
         ]);
 
-        $query->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'country', $this->country])
-            ->andFilterWhere(['like', 'city', $this->city])
-            ->andFilterWhere(['like', 'ip', $this->ip])
-            ->andFilterWhere(['like', 'link', $this->link])
-            ->andFilterWhere(['like', 'createdAt', $this->createdAt])
-            ->andFilterWhere(['like', 'updatedAt', $this->updatedAt]);
+        $query
+            ->andFilterWhere(['like', Subscriber::tableName() . '.[[email]]', $this->email])
+            ->andFilterWhere(['like', Subscriber::tableName() . '.[[country]]', $this->country])
+            ->andFilterWhere(['like', Subscriber::tableName() . '.[[city]]', $this->city])
+            ->andFilterWhere(['like', Subscriber::tableName() . '.[[ip]]', $this->ip])
+            ->andFilterWhere(['like', Subscriber::tableName() . '.[[link]]', $this->link])
+            ->andFilterWhere(['like', Subscriber::tableName() . '.[[createdAt]]', $this->createdAt])
+            ->andFilterWhere(['like', Subscriber::tableName() . '.[[updatedAt]]', $this->updatedAt]);
 
         return $dataProvider;
     }

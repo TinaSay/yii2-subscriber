@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'active',
                 ],
                 [
-                    'attribute' => 'groupIDs',
+                    'attribute' => 'groupIds',
                     'filter' => SubscriptionGroup::asDropDown(),
                     'value' => function (Subscriber $model) {
                         return $model->getGroupsString();
