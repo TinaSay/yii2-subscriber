@@ -89,7 +89,7 @@ class Subscriber extends \yii\db\ActiveRecord implements BlockedAttributeInterfa
             [['email'], 'unique'],
             [['blocked', 'active'], 'integer'],
             [['createdAt', 'updatedAt', 'country', 'city', 'coordinates', 'ip', 'link', 'token'], 'safe'],
-            [['groupIDs'], 'each', 'rule' => ['integer']],
+            [['groupIds'], 'each', 'rule' => ['integer']],
         ];
     }
 
