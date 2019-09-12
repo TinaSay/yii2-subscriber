@@ -44,4 +44,16 @@ class SubscriptionGroupQuery extends \yii\db\ActiveQuery
 
         return $this;
     }
+
+    /**
+     * @param int $hidden
+     *
+     * @return $this
+     */
+    public function hidden(int $hidden = SubscriptionGroup::HIDDEN_NO)
+    {
+        return $this->andWhere([
+            SubscriptionGroup::tableName() . '.[[hidden]]' => $hidden,
+        ]);
+    }
 }

@@ -3,6 +3,8 @@
 namespace tina\subscriber\filter;
 
 use tina\subscriber\models\Subscriber;
+use tina\subscriber\models\SubscriptionGroupQuery;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class SubscriberFilter
@@ -12,68 +14,14 @@ use tina\subscriber\models\Subscriber;
 class SubscriberFilter implements SubscriberFilterInterface
 {
     /**
-     * @var int $limit
+     * @return array
      */
-    protected $limit;
-
-    /**
-     * @var int $offset
-     */
-    protected $offset;
-
-    /**
-     * @var string $orderBy
-     */
-    protected $orderBy;
-
-    /**
-     * @param int $limit
-     *
-     * @return $this|SubscriberFilterInterface
-     */
-    public function setLimit(int $limit)
+    public function list(): array
     {
-        $this->limit = $limit;
-
-        return $this;
-    }
-
-    /**
-     * @param int $offset
-     *
-     * @return $this|SubscriberFilterInterface
-     */
-    public function setOffset(int $offset)
-    {
-        $this->offset = $offset;
-
-        return $this;
-    }
-
-    /**
-     * @param array $orderBy
-     *
-     * @return $this|SubscriberFilterInterface
-     */
-    public function setOrderBy(array $orderBy)
-    {
-        $this->orderBy = $orderBy;
-
-        return $this;
-    }
-
-    /**
-     * @param array $condition
-     *
-     * @return array|Subscriber[]
-     */
-    public function filter(array $condition)
-    {
-        return Subscriber::find()
-            ->where($condition)
-            ->limit($this->limit)
-            ->offset($this->offset)
-            ->orderBy($this->orderBy)
-            ->all();
+        return ArrayHelper::map(Subscriber::find()->innerJoinWith([
+            'groupsRelation' => function (SubscriptionGroupQuery $query) {
+                $query->language()->hidden();
+            },
+        ])->blocked()->active()->asArray()->all(), 'email', 'email');
     }
 }

@@ -194,23 +194,8 @@ DI:
     }
 ```
 
-To select particular columns use:
-
-```
-    $query = $this->subscriberFilter->filter([
-        'column' => 'value',
-    ]);
-    
-```
-
-To select particular columns with additional conditions use:
-
 ```    
-    $query = $this->subscriberFilter->filter([
-        'and',
-        ['column' => 'value'],
-        ['like', 'column', 'value'],
-    ]);
+    $list = $this->subscriberFilter->list();
 
 ```
 

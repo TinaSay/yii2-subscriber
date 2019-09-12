@@ -26,4 +26,28 @@ class SubscriberQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+
+    /**
+     * @param int $blocked
+     *
+     * @return $this
+     */
+    public function blocked(int $blocked = Subscriber::BLOCKED_NO)
+    {
+        return $this->andWhere([
+            Subscriber::tableName() . '.[[blocked]]' => $blocked,
+        ]);
+    }
+
+    /**
+     * @param int $active
+     *
+     * @return $this
+     */
+    public function active(int $active = Subscriber::ACTIVE_YES)
+    {
+        return $this->andWhere([
+            Subscriber::tableName() . '.[[active]]' => $active,
+        ]);
+    }
 }
