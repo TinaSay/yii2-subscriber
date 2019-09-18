@@ -3,7 +3,6 @@
 namespace tina\subscriber\filter;
 
 use tina\subscriber\models\Subscriber;
-use tina\subscriber\models\SubscriptionGroupQuery;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -18,10 +17,6 @@ class SubscriberFilter implements SubscriberFilterInterface
      */
     public function list(): array
     {
-        return ArrayHelper::map(Subscriber::find()->innerJoinWith([
-            'groupsRelation' => function (SubscriptionGroupQuery $query) {
-                $query->language()->hidden();
-            },
-        ])->blocked()->active()->asArray()->all(), 'email', 'email');
+        return ArrayHelper::map(Subscriber::find()->blocked()->active()->asArray()->all(), 'email', 'email');
     }
 }
