@@ -2,9 +2,9 @@
 
 namespace tina\subscriber\assets;
 
+use krok\extend\widgets\YMap\YMapWidgetAsset;
 use yii\web\AssetBundle;
 use yii\web\JqueryAsset;
-use yii\web\View;
 
 /**
  * Class YandexMapAsset
@@ -22,15 +22,7 @@ class YandexMapAsset extends AssetBundle
      * @var array
      */
     public $js = [
-        'https://api-maps.yandex.ru/2.1/?lang=ru_RU&csp=true',
         'js/yandexMap.js',
-    ];
-
-    /**
-     * @var array
-     */
-    public $jsOptions = [
-        'position' => View::POS_HEAD,
     ];
 
     /**
@@ -45,5 +37,6 @@ class YandexMapAsset extends AssetBundle
      */
     public $depends = [
         JqueryAsset::class,
+        YMapWidgetAsset::class,
     ];
 }
