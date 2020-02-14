@@ -36,7 +36,7 @@
         "yii2-developer/yii2-extend": "~1.0.0",
         "yii2-developer/yii2-grid": "~0.0.1",
         "yii2-developer/yii2-system": "~1.0.0",
-        "yii2-developer/yii2-queue": "~1.0.0",
+        "yii2-developer/yii2-queue": "~1.2.0",
         "yii2-developer/yii2-select2": "~0.1.0",
         "voskobovich/yii2-many-many-behavior": "~3.0"
     },
